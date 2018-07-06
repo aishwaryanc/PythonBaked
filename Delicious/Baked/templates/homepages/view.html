@@ -1,0 +1,51 @@
+{% include "common/header.html" %}
+	<!--/banner-->
+	<div class="banner-inner">{% load staticfiles %}{}
+	</div>
+	<!--//banner-->
+	<!--/nav-->
+	{% include "common/nav.html" %}
+	<!--//nav-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="index.html">Home</a>
+		</li>
+		<li class="breadcrumb-item active">Contact Us</li>
+	</ol>
+	<!--/main-->
+	<section class="banner-bottom">
+		<div class="container">
+			<div class="contact_grid_right">
+				<table class="table-bordered">
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Subject</th>
+					<th>Message</th>
+					<th>Images</th>
+					<th>Action</th>
+				</tr>
+				{% for user in users %}
+				<tr>
+					<td>{{user.Name}}</td>
+					<td>{{user.Email}}</td>
+					<td>{{user.Subject}}</td>
+					<td>{{user.Message}}</td>
+					{% if not user.File %}
+					<td><img src="{% static 'images/user.png' %}" width="60px" height="50px"></td>
+					{% else %}
+					<td><img src="{% static 'media/' %}{{user.File}}" width="60px" height="50px"></td>
+					{% endif %}
+				<td><a href="{%url 'contact' user.id %}"><button class="btn btn-primary">Edit</button></a>
+				<a href="{%url 'delete' user.id %}"><button class="btn btn-success">Delete</button></a></td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+		</div>
+	</section>
+	<!--//main-->
+	<!--footer-->
+	{% include "common/footer.html" %}
+</body>
+</html>
